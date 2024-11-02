@@ -35,6 +35,7 @@ jobs:
       - name: Generate pages
         run: |
           ./code-maven web
+          cp -r examples/ _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
