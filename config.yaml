@@ -3,7 +3,7 @@
 url: https://front.code-maven.com
 
 # site_name is used in the atom feed and in the Open Graph meta field of each page
-site_name: Front-end Code-Maven
+site_name: Front-end Maven
 
 # The source of the https://rust.code-maven.com site is in a public git repository
 # using the 'main' branch.

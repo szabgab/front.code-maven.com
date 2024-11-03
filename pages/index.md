@@ -1,5 +1,5 @@
 ---
-title: Front-End
+title: Front-End Maven
 timestamp: 2015-10-11T12:30:01
 published: true
 author: szabgab
