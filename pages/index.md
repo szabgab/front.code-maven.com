@@ -15,6 +15,7 @@ This is the main page of your site.
 ## Books
 
 * [CSS](/css/)
+* [JavaScript](/javascript/)
 
 ## Recent posts
 
