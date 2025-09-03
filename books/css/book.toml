@@ -6,9 +6,9 @@ title = "CSS - Cascading StyleSheet"
 
 # Add github icon to the menu
 [output.html]
-git-repository-url = "https://github.com/szabgab/slides"
+git-repository-url = "https://github.com/szabgab/front.code-maven.com"
 git-repository-icon = "fa-github"
-edit-url-template = "https://github.com/szabgab/slides/edit/main/css/{path}"
+edit-url-template = "https://github.com/szabgab/front.code-maven.com/edit/main/books/css/{path}"
 
 [output.markdown]
 

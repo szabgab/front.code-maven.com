@@ -12,6 +12,10 @@ todo:
 
 This is the main page of your site.
 
+## Books
+
+* [CSS](/css/)
+
 ## Recent posts
 
 {% latest limit=5 %}
