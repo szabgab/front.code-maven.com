@@ -1,10 +1,11 @@
-name: Deploy GitHub Pages
+name: CI
+
 on:
   push:
     branches: ["main"]
+  pull_request:
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -15,6 +16,7 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
+
 
 jobs:
   # Build job
@@ -35,7 +37,40 @@ jobs:
       - name: Generate pages
         run: |
           ./code-maven web
-          cp -r examples/ _site/
+
+      - name: Checkout slides repository to get the mdbook.pl
+        uses: actions/checkout@v5
+        with:
+          repository: 'szabgab/slides'
+          ref: mdbooks
+          path: slides
+
+      - name: Download mdBook
+        env:
+          MDBOOK_VERSION: 0.4.51
+          EMBEDIFY_VERSION: 0.2.13
+          ALERTS_VERSION: 0.7.0
+        run: |
+          set -x
+          wget https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+          tar xzf mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+
+          wget https://github.com/MR-Addict/mdbook-embedify/releases/download/${EMBEDIFY_VERSION}/mdbook-embedify-${EMBEDIFY_VERSION}-x86_64-unknown-linux-gnu.zip
+          unzip mdbook-embedify-${EMBEDIFY_VERSION}-x86_64-unknown-linux-gnu.zip
+          mv mdbook-embedify-${EMBEDIFY_VERSION}-x86_64-unknown-linux-gnu/mdbook-embedify .
+
+          wget https://github.com/lambdalisue/rs-mdbook-alerts/releases/download/v${ALERTS_VERSION}/mdbook-alerts-x86_64-unknown-linux-gnu
+          mv mdbook-alerts-x86_64-unknown-linux-gnu mdbook-alerts
+          chmod +x mdbook-alerts
+
+      - name: Generate mdbooks
+        run: |
+          export PATH=$PATH:$(pwd)
+          #./books.sh
+          perl slides/mdbooks.pl
+          mv html/* _site/
+
+
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -51,3 +86,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
