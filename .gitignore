@@ -2,3 +2,4 @@ _site/
 *.bak
 *.swp
 
+/books/*/book/

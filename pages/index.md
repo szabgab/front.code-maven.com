@@ -16,6 +16,7 @@ This is the main page of your site.
 
 * [CSS](/css/)
 * [JavaScript](/javascript/)
+* [Vue](/vue/)
 
 ## Recent posts
 
