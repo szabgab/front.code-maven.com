@@ -1,0 +1,30 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+<button @click="get_data">Get</button>
+<div v-if="data">
+{{data.info.description}}
+</div>
+
+</div>
+
+<script>
+    const { createApp, ref } = Vue
+
+    createApp({
+        methods: {
+            async get_data() {
+                console.log("fetch data")
+                const url = "https://pypi.org/pypi/pydigger/json"                
+                this.data = await (await fetch(url)).json()
+            }        
+        }, 
+        setup() {
+            const data = ref(null)
+            return {
+                data
+            }
+        }
+    }).mount('#app')
+</script>
+
