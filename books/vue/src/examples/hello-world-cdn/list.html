@@ -1,0 +1,43 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+  <div>{{ message }}</div>
+
+  <h2>{{data.title}}</h2>
+  <table>
+    <thead>
+        <th>Name</th>
+        <th>Year</th>
+    </thead>
+    <tbody>
+        <tr v-for="language in data.languages">
+            <td>{{language.name}}</td>
+            <td>{{language.year}}</td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  const { createApp, ref } = Vue
+
+  createApp({
+    setup() {
+      const message = ref('Hello vue!')
+      const data = ref({
+          title: 'Programming languages',
+          languages: [
+              { name: "Perl", year: 1987 },
+              { name: "Python", year: 1991  },
+              { name: "JavaScript", year: 1995 },
+              { name: "Rust", year: 2010 },
+              { name: "Gleam", year: 2024 },
+          ],
+      })
+
+      return {
+        message, data
+      }
+    }
+  }).mount('#app')
+</script>
