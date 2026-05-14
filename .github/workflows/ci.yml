@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout site source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download processor
         run: |
@@ -32,14 +32,14 @@ jobs:
           chmod +x code-maven
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
 
       - name: Generate pages
         run: |
           ./code-maven web
 
       - name: Checkout slides repository to get the mdbook.pl
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: 'szabgab/slides'
           ref: mdbooks
@@ -73,7 +73,7 @@ jobs:
 
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
 
   # Deployment job
   deploy:
@@ -85,5 +85,5 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
